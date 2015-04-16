@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 
-var form = document.querySelector('form');
+var form = $('form');
 var geocoder;
 
-form.addEventListener('submit', checkForm);
+form.on("submit", checkForm);
 
 function checkForm(e)
 {
     e.preventDefault();
     var isValid = true;
-    var fields = document.querySelectorAll('form p');
+    var fields = $('form p');
     var fieldlen = fields.length;
 
 
@@ -26,27 +26,27 @@ function checkForm(e)
         jsondata[input.name] = input.value;
 
         if (input.value === '') {
-            fields[i].classList.add('error');
+            $(fields[i]).addClass('error');
             isValid = false;
         } else {
-            fields[i].classList.remove('error');
+            $(fields[i]).removeClass('error');
         }
     }
     console.log(jsondata);
 
     if (jsondata.password !== jsondata.confirmpassword)
     {
-        document.querySelector('.passwordError').classList.add('error');
-        document.querySelector('.confirmpasswordError').classList.add('error');
+        $('.passwordError').addClass('error');
+        $('.confirmpasswordError').addClass('error');
 
         isValid = false;
     }
 
     if (isValid) {
-        form.classList.add('hide');
-        var confirmation = document.querySelector('#confirmation');
+        form.addClass('hide');
+        var conf = $('#confirmation');
 
-        var html = '<p>First Name: ' + jsondata.fname + '</p>';
+        var html = '<p>First Name: ' + input.value + '</p>';
         html += '<p>Last Name: ' + jsondata.lname + '</p>';
         html += '<p>Email: ' + jsondata.email + '</p>';
         html += '<p>Phone: ' + jsondata.phone + '</p>';
@@ -59,7 +59,8 @@ function checkForm(e)
         html += '<p>Password: ' + jsondata.password + '</p>';
         html += '<p>Confirm Password: ' + jsondata.confirmpassword + '</p>';
 
-        confirmation.innerHTML = html;
+        conf.html(html);
+
 
     }
 
