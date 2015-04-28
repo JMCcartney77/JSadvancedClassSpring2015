@@ -8,7 +8,10 @@ and open the template in the editor.
     Author     : GFORTI
 */
 
-
+html{
+    
+        background-color:activecaption;
+}
 .error {
     color: red;
 }

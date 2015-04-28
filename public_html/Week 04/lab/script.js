@@ -26,7 +26,7 @@ function checkForm(e)
         "address1": {"regex": /^$/},
         "address2": {"regex": /^$/},
         "city": {"regex": /^$/},
-        "zipcode": {"regex": /^$/},
+        "zipcode": {"regex": /^\d{5}(?:[-\s]\d{4})?$/},
         "username": {"regex": /^$/},
         "password": {"regex": /^$/},
         "confirmpassword": {"regex": /^$/}
@@ -67,7 +67,41 @@ function checkForm(e)
          
           isValid = false;
     }
-
+    if (!regexValidations.fname.regex.test(jsondata.fname)) {
+         document.querySelector('.fnameError').classList.add('error');
+         
+          isValid = false;
+    }
+    if (!regexValidations.lname.regex.test(jsondata.lnamel)) {
+         document.querySelector('.lnameError').classList.add('error');
+         
+          isValid = false;
+    }
+    if (!regexValidations.address1.regex.test(jsondata.address1)) {
+         document.querySelector('.address1Error').classList.add('error');
+         
+          isValid = false;
+    }
+    if (!regexValidations.address2.regex.test(jsondata.address2)) {
+         document.querySelector('.address2Error').classList.add('error');
+         
+          isValid = false;
+    }
+    if (!regexValidations.city.regex.test(jsondata.city)) {
+         document.querySelector('.cityError').classList.add('error');
+         
+          isValid = false;
+    }
+    if (!regexValidations.zipcode.regex.test(jsondata.zipcode)) {
+         document.querySelector('.zipcodeError').classList.add('error');
+         
+          isValid = false;
+    }
+    if (!regexValidations.username.regex.test(jsondata.username)) {
+         document.querySelector('.usernameError').classList.add('error');
+         
+          isValid = false;
+    }   
     if (isValid) {
         form.classList.add('hide');
         var confirmation = document.querySelector('#confirmation');
