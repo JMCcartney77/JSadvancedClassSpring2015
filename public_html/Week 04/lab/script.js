@@ -19,17 +19,18 @@ function checkForm(e)
 
     var jsondata = {};
     var regexValidations = {
-        "fname": {"regex": /^\(?([2-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/},
-        "lname": {"regex": /^$/},
-        "email": {"regex": /^[a-zA-Z0-9$]+[@]{1}[a-zA-Z]+[\.]{1}[a-zA-Z]{2,3}$/},
+        "fname": {"regex": /^.*$/},
+        "lname": {"regex": /^.*/},
+        "email": {"regex": /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/},
         "phone": {"regex": /^\(?([2-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/},
-        "address1": {"regex": /^$/},
-        "address2": {"regex": /^$/},
-        "city": {"regex": /^$/},
+        "address1": {"regex": /^[0-9 a-zA-Z]+/},
+        "address2": {"regex": /^[0-9 a-zA-Z]+/},
+        "city": {"regex": /^.*$/},
+        "state":{"regex":/^[A-Z]{2}$/},
         "zipcode": {"regex": /^\d{5}(?:[-\s]\d{4})?$/},
-        "username": {"regex": /^$/},
-        "password": {"regex": /^$/},
-        "confirmpassword": {"regex": /^$/}
+        "username": {"regex": /^[A-Za-z0-9_-]{3,15}$/},
+        "password": {"regex": /[a-zA-Z0-9!@#$%^&*]{10,}/},
+        "confirmpassword": {"regex": /[a-zA-Z0-9!@#$%^&*]{10,}/},
 
     };
 
@@ -37,9 +38,18 @@ function checkForm(e)
     // create the for loop
     for (var i = 0; i < fieldlen; i++) {
         var input = paragraphs[i].querySelector('input');
+        var label = paragraphs[i].querySelector('label');
         jsondata[input.name] = input.value;
 
-        if (input.value === '') {
+
+        if(input.name === "address2" && input.value === ""){
+            
+            paragraphs[i].classList.remove('error');
+            continue;
+        }
+            
+        
+        if (input.value === ''|| !regexValidations[input.name].regex.test(input.value)) {
             paragraphs[i].classList.add('error');
             isValid = false;
         } else {
@@ -55,7 +65,6 @@ function checkForm(e)
 
         isValid = false;
     }
-
 
     if (!regexValidations.email.regex.test(jsondata.email)) {
          document.querySelector('.emailError').classList.add('error');
@@ -87,7 +96,7 @@ function checkForm(e)
          
           isValid = false;
     }
-    if (!regexValidations.city.regex.test(jsondata.city)) {
+   if (!regexValidations.city.regex.test(jsondata.city)) {
          document.querySelector('.cityError').classList.add('error');
          
           isValid = false;
