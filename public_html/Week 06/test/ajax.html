@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        
+        First Name : <input name="fname" type="text" value="" /> <br />
+        color : <input name="colors" type="color" /> <br />         
+        Range : 1 <input name="ranges" type="range" min="1" max="10" /> 10 <br />         
+        DOB : <input name="dob" type="date" /> <br />
+        <br />
+        
+        <button id="GET">Make GET Request</button>
+        <button id="POST">Make POST Request</button>
+        
+         <script type="text/javascript">
+        
+            var btnGET = document.querySelector('#GET');            
+            btnGET.addEventListener('click', callGet);
+            
+            var btnPOST = document.querySelector('#POST');            
+            btnPOST.addEventListener('click', callPost);
+            
+            var jsonData = {};
+            
+            function getData() {
+                var inputs = document.querySelectorAll('input');
+                
+                for ( var i = 0, l = inputs.length; i < l; i ++ ) {
+                   jsonData[inputs[i].name] = encodeURIComponent(inputs[i].value);
+                }
+                
+                var results = '';
+                for ( var key in jsonData ) {
+                    results += ':'+key + '=' + jsonData[key] + '&'; 
+                }
+                results = results.slice(0, -1);
+                return results;
+            };
+            
+            function callGet() {
+                var url = 'data.php?';
+                var data = getData();                
+                url = url + data;
+                console.log(url);
+                makeAJAXCall('GET', url, null);
+            }
+
+            function callPost() {
+                var url = 'data.php';                
+                var data = getData();
+                console.log(url);
+                makeAJAXCall('POST', url, data);
+            }
+
+
+
+           function makeAJAXCall(verb, url, data) {                
+                
+                var xmlhttp = new XMLHttpRequest();
+
+                xmlhttp.open(verb, url, true);
+
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4 ) {
+
+                        console.log(xmlhttp.responseText);
+                                                
+                    } else {
+                        // waiting for the call to complete
+                    }
+                };
+                
+                 if ( verb === 'GET' ) {
+                      xmlhttp.send(null);
+                 } else if ( verb === 'POST' ) {
+                    xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                    xmlhttp.send(data);
+                }
+            }
+        
+        
+        </script>
+    </body>
+</html>
