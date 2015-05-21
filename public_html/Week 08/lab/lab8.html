@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lab 8</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style type="text/css">
+            canvas {
+                border: 1px solid black;
+            }
+            //Make 2 variables, red and blue winner. Bools, clear resets back to falseXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+        </style>
+    </head>
+    <body>
+        
+        <canvas id="race" width="750" height="150"></canvas>
+        <br />
+        <button id="play">Play</button>
+        
+        <script type="text/javascript">
+            
+            var can = document.querySelector('#race');
+            var ctx = can.getContext('2d');
+            var Play = document.querySelector('#play');
+           
+            var width = 90,
+                height = 30,
+                bluex = 0,
+                bluey = 10;
+                redx = 0;
+                redy = 80;
+                         
+        
+            var canvasBottom = (can.height - height );
+            var canvasRight = (can.width - width - 50 );
+            
+            function Race(){
+                drawClear();                
+                moveRectBlue();
+                moveRectRed();
+                setTimeout(Race, 100);
+                ctx.fillRect(700, 0, 1, 150);                   
+                
+            }
+            
+            function reset(){
+                width = 90,
+                height = 30,
+                bluex = 0,
+                bluey = 10;
+                redx = 0;
+                redy = 80;
+                Race();
+            }
+            
+            function drawClear(){
+                ctx.clearRect(0,0,can.width,can.height);
+            }
+            
+            function moveRectRed(){
+                ctx.fillStyle = "red";
+                 if ( redx < canvasRight ) {                    
+                    redx += randNum(20);                    
+                    ctx.fillRect(redx, redy, width, height); // x y / w h                                    
+                } 
+            }
+               
+            function moveRectBlue(){
+                ctx.fillStyle = "blue";
+                 if ( bluex < canvasRight ) {                    
+                    bluex += randNum(20);                    
+                    ctx.fillRect(bluex, bluey, width, height); // x y / w h                   
+                    
+                    } else {        
+                }              
+            }  
+            function line(){
+                width = 5,
+                height = 150;
+                color = purple;
+                
+            }
+            //text = document.querySelector('#text');
+            //text.addEventListener('click', Play);
+            
+           function randNum(max) {
+               return Math.ceil(Math.random()*max) + 1;               
+               
+           }
+           Play.addEventListener('click', reset);
+           window.addEventListener('load', Race);
+        </script>
+    </body>
+</html>
