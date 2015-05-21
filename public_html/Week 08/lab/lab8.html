@@ -12,83 +12,93 @@
         </style>
     </head>
     <body>
-        
+
         <canvas id="race" width="750" height="150"></canvas>
         <br />
         <button id="play">Play</button>
-        
+
         <script type="text/javascript">
-            
+
             var can = document.querySelector('#race');
             var ctx = can.getContext('2d');
             var Play = document.querySelector('#play');
-           
+
             var width = 90,
-                height = 30,
-                bluex = 0,
-                bluey = 10;
-                redx = 0;
-                redy = 80;
-                         
-        
-            var canvasBottom = (can.height - height );
-            var canvasRight = (can.width - width - 50 );
-            
-            function Race(){
-                drawClear();                
+                    height = 30,
+                    bluex = 0,
+                    bluey = 10,
+                    redx = 0,
+                    redy = 80;
+
+            var redwinner = false;
+            var bluewinner = false;
+            var canvasBottom = (can.height - height);
+            var canvasRight = (can.width - width - 50);
+
+            function Race() {
+                drawClear();
                 moveRectBlue();
                 moveRectRed();
-                setTimeout(Race, 100);
-                ctx.fillRect(700, 0, 1, 150);                   
-                
+                ctx.fillRect(700, 0, 1, 150);
+                if (redwinner === false && bluewinner === false){
+                    setTimeout(Race, 100);
+                }
             }
-            
-            function reset(){
-                width = 90,
-                height = 30,
-                bluex = 0,
+
+            function reset() {
+                width = 90;
+                height = 30;
+                bluex = 0;
                 bluey = 10;
                 redx = 0;
                 redy = 80;
+                redwinner = false;
+                bluewinner = false;
                 Race();
             }
-            
-            function drawClear(){
-                ctx.clearRect(0,0,can.width,can.height);
+
+            function drawClear() {
+                ctx.clearRect(0, 0, can.width, can.height);
             }
-            
-            function moveRectRed(){
+
+            function moveRectRed() {
                 ctx.fillStyle = "red";
-                 if ( redx < canvasRight ) {                    
-                    redx += randNum(20);                    
+                if (redx < canvasRight) {
+                    redx += randNum(20);
                     ctx.fillRect(redx, redy, width, height); // x y / w h                                    
-                } 
+                } else {
+                    ctx.fillRect(redx, redy, width, height);
+                    redwinner = true;
+                }
             }
-               
-            function moveRectBlue(){
+
+            function moveRectBlue() {
                 ctx.fillStyle = "blue";
-                 if ( bluex < canvasRight ) {                    
-                    bluex += randNum(20);                    
+                if (bluex < canvasRight) {
+                    bluex += randNum(20);
                     ctx.fillRect(bluex, bluey, width, height); // x y / w h                   
-                    
-                    } else {        
-                }              
-            }  
-            function line(){
-                width = 5,
-                height = 150;
-                color = purple;
+
+                } else {
+                    bluewinner = true;
+                    ctx.fillRect(bluex, bluey, width, height);
+                }
                 
+            }
+            function line() {
+                        width = 5,
+                        height = 150;
+
+
             }
             //text = document.querySelector('#text');
             //text.addEventListener('click', Play);
-            
-           function randNum(max) {
-               return Math.ceil(Math.random()*max) + 1;               
-               
-           }
-           Play.addEventListener('click', reset);
-           window.addEventListener('load', Race);
+
+            function randNum(max) {
+                return Math.ceil(Math.random() * max) + 1;
+
+            }
+            Play.addEventListener('click', reset);
+            window.addEventListener('load', Race);
         </script>
     </body>
 </html>
