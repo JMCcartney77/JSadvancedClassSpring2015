@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div id="clock">TODO write content</div>
+        
+        <script type="text/javascript">
+            
+            var clock = document.getElementById('clock');
+            var clockTimer = setTimeout(updateClock, 1000);
+            
+            function updateClock() {
+                var newdate = new Date();
+                clock.innerHTML = newdate; // SETS THE TIME
+                setTimeout(updateClock, 1000); // 1000 Miliseconds = 1 SEC Sets the function to run after 1 sec
+                
+                //var hello = function(){} the variable Hello is now a function
+            }
+            
+            
+            
+        </script>
+        
+    </body>
+</html>
