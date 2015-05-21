@@ -18,29 +18,63 @@
         
         <script type="text/javascript">
             
-            function 
-            
+            var can = document.querySelector('#race');
+            var ctx = can.getContext('2d');
+            var Play = document.querySelector('#Play');
+           
             var width = 90,
-                height = 50,
-                xaxis = 150,
-                yaxis = 0;  
+                height = 30,
+                bluex = 0,
+                bluey = 10;
+                redx = 0;
+                redy = 80;
+                         
+        
+            var canvasBottom = (can.height - height );
+            var canvasRight = (can.width - width );
             
+            function Race(){
+                drawClear();                
+                moveRectBlue();
+                moveRectRed();
+                setTimeout(Race, 100);               
+            }
             
+            function drawClear(){
+                ctx.clearRect(0,0,can.width,can.height);
+            }
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            function moveRectRed(){
+                ctx.fillStyle = "red";
+                 if ( redx < canvasRight ) {                    
+                    redx += randNum(20);                    
+                    ctx.fillRect(redx, redy, width, height); // x y / w h                                    
+                } 
+            }
+               
+            function moveRectBlue(){
+                ctx.fillStyle = "blue";
+                 if ( bluex < canvasRight ) {                    
+                    bluex += randNum(20);                    
+                    ctx.fillRect(bluex, bluey, width, height); // x y / w h                   
+                    
+                    } else {        
+                }              
+            }  
+            function line(){
+                width = 5,
+                height = 150;
+                
+                
+            }
+            //text = document.querySelector('#text');
+            //text.addEventListener('click', Play);
             
            function randNum(max) {
-               return Math.ceil(Math.random()*max) + 1;
+               return Math.ceil(Math.random()*max) + 1;               
+               
            }
+           window.addEventListener('load', Race);
         </script>
     </body>
 </html>
