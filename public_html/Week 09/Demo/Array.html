@@ -11,11 +11,19 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <button id="Pop">Pop</button>
         <div>TODO write content</div>
 
         <script>
-            
-            // This is the name of the array "arr2"
+            function removeItem(){
+                arr2.pop(); 
+                console.log(arr2);
+            }
+                var removed = document.querySelector('#Pop');
+                    removed.addEventListener('click', removeItem);            
+                    
+           
+            // "arr2" is the name of the 2nd array 
             var arr2 = [];
 
             arr2.push({
@@ -33,6 +41,7 @@ and open the template in the editor.
             addArr('ken', 'joe');
             addArr('ken1', 'joe1');
             addArr('ken2', 'joe2');
+            console.clear();
             console.log(arr2);
             
            </script>   

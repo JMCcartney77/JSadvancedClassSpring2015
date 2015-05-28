@@ -12,13 +12,63 @@ and open the template in the editor.
     </head>
     <body>
         <table>
-            <tbody>
+            <thead>
                 <tr>
                     <th></th>
                     <th>First</th>
                     <th>Last</th>
                 </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
+        <script>
+            
+    var arr2 = [];
+           
+            //create the function   
+            function addArr(fname, lname) {
+                var jsonD = {};
+                jsonD.fname = fname;
+                jsonD.lname = lname;
+                arr2.push(jsonD);                
+            }
+            //loop through/output first and last name for each row
+            addArr('ken', 'joe');
+            addArr('ken1', 'joe1');
+            addArr('ken2', 'joe2');
+            
+            //Use Console.Log to show in WebPage Console "F12"
+            console.log(arr2); 
+            
+            //Declare variables and keep them as empty strings "" i equals '0' and is not a string
+            var first = "";
+            var last = "";
+            var htmlstring = "";
+            var i = 0;
+            
+            //Start the "FOR Loop".
+            //1.) i is set to '0', 
+            //2.) the Array 'arr2.length' gives the array the space needed to increment by 1 (i++).
+            //3.) The 'First', 'Last' and 'HTMLString' increment by the i++ 
+            //which creates the first Row in the table 
+            
+               for (i = 0; i < arr2.length; i++) { 
+                  first = arr2[i].fname;
+                  last = arr2[i].lname;
+                 htmlstring += '<tr><td>' + i + '</td><td>' + first + '</td><td>' + last + '</td></tr>';                                     
+                } 
+                //this line is correct
+                 var  tbody = document.querySelector('tbody');
+                 
+                  tbody.innerHTML = htmlstring;
+                  console.log(htmlstring);
+            
+           </script> 
     </body>
 </html>

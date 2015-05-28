@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        First Name <input type="text" name="fname" />
+        <span id="fnamErr"></span>
+        Last Name<input type="text" name="lname" />
+        <span id="lnameErr"></span>
+        
+        
+        <input type="button" value="submit" />
+        <script>
+            // Right click inspect element , right click on inspected element in console, copy CSS path
+            var button = document.querySelector('body > input[type="button"]:nth-child(5)'); 
+            
+            /*Click on submit should take the first and last name, save the values into JSON object, add the JSON object into the array
+             * and then output to the output console of the array.
+             */
+            //Declare the Array
+             var arraydata = [];
+            //Create the Function
+            function addArr() {
+                var jsonD = {};
+                jsonD.fname = fname;
+                jsonD.lname = lname;
+                arraydata.push(jsonD);                
+            }
+           
+        </script>
+        
+        
+    </body>
+</html>
