@@ -40,12 +40,28 @@
                 moveRectBlue();
                 moveRectRed();
                 ctx.fillRect(700, 0, 1, 150);
-                if (redwinner === false && bluewinner === false){
+                if (redwinner === false && bluewinner === false) {
                     setTimeout(Race, 100);
                 }
+                else {
+                    Play.style.display = 'block';
+                    Winner();// runs/executes a function ();
+                }
             }
-
+            function Winner() {
+                if (bluewinner == true) {
+                    ctx.fillStyle = "blue";
+                    ctx.font = "16pt Helvetica";
+                    ctx.fillText("bluewinner", 150, can.height - 10);
+                }
+                if (redwinner == true) {
+                    ctx.fillStyle = "red";
+                    ctx.font = "16pt Helvetica";
+                    ctx.fillText("redwinner", 150, can.height - 10);
+                }
+            }
             function reset() {
+                Play.style.display = 'none';
                 width = 90;
                 height = 30;
                 bluex = 0;
@@ -82,10 +98,10 @@
                     bluewinner = true;
                     ctx.fillRect(bluex, bluey, width, height);
                 }
-                
+
             }
             function line() {
-                        width = 5,
+                width = 5,
                         height = 150;
 
 
@@ -98,6 +114,7 @@
 
             }
             Play.addEventListener('click', reset);
+            Play.style.display = 'none';
             window.addEventListener('load', Race);
         </script>
     </body>
